@@ -1,0 +1,246 @@
+{
+ "duration": 76.74775510204081,
+ "frames30": 2302,
+ "source": "silence-align (cost 5.79)",
+ "segments": [
+  [
+   0.0,
+   2.870454
+  ],
+  [
+   3.04288,
+   4.9878
+  ],
+  [
+   5.717959,
+   7.618844
+  ],
+  [
+   7.97059,
+   9.330522
+  ],
+  [
+   9.491497,
+   11.854308
+  ],
+  [
+   12.00449,
+   14.196871
+  ],
+  [
+   14.86907,
+   16.017982
+  ],
+  [
+   16.739342,
+   19.065692
+  ],
+  [
+   19.649841,
+   21.635828
+  ],
+  [
+   22.131451,
+   25.228685
+  ],
+  [
+   25.868209,
+   27.3078
+  ],
+  [
+   27.509524,
+   30.771746
+  ],
+  [
+   31.486281,
+   31.873084
+  ],
+  [
+   32.113039,
+   34.078957
+  ],
+  [
+   34.220159,
+   36.455057
+  ],
+  [
+   36.623719,
+   37.132562
+  ],
+  [
+   37.915261,
+   39.718413
+  ],
+  [
+   39.842041,
+   42.81839
+  ],
+  [
+   42.951587,
+   43.313243
+  ],
+  [
+   43.55059,
+   44.078163
+  ],
+  [
+   44.858413,
+   45.817302
+  ],
+  [
+   46.108957,
+   49.652562
+  ],
+  [
+   49.882472,
+   50.433878
+  ],
+  [
+   50.568095,
+   51.414626
+  ],
+  [
+   52.19381,
+   55.678186
+  ],
+  [
+   56.320227,
+   56.82356
+  ],
+  [
+   57.21839,
+   59.305646
+  ],
+  [
+   60.063243,
+   63.159025
+  ],
+  [
+   63.62093,
+   66.017755
+  ],
+  [
+   66.724875,
+   68.451224
+  ],
+  [
+   68.920726,
+   70.654512
+  ],
+  [
+   71.062404,
+   73.779592
+  ],
+  [
+   74.324762,
+   76.603265
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "The first suspension bridge across Niagara Gorge was started with a five-dollar kite.",
+   "s": 0.0,
+   "e": 4.988
+  },
+  {
+   "text": "In January eighteen forty-eight,",
+   "s": 5.718,
+   "e": 7.619
+  },
+  {
+   "text": "engineer Charles Ellet promised to link America and Canada over eight hundred feet of boiling rapids.",
+   "s": 7.971,
+   "e": 14.197
+  },
+  {
+   "text": "There was just one problem:",
+   "s": 14.869,
+   "e": 16.018
+  },
+  {
+   "text": "nobody could get the first wire across.",
+   "s": 16.739,
+   "e": 19.066
+  },
+  {
+   "text": "Boats would get shredded in seconds.",
+   "s": 19.65,
+   "e": 21.636
+  },
+  {
+   "text": "Cannons couldn't shoot a heavy line that far without snapping it.",
+   "s": 22.131,
+   "e": 25.229
+  },
+  {
+   "text": "Rival engineers laughed and said he'd have better luck training a flock of eagles to carry it.",
+   "s": 25.868,
+   "e": 31.873
+  },
+  {
+   "text": "So Ellet offered a five-dollar prize to any kid who could fly a kite from cliff to cliff.",
+   "s": 32.113,
+   "e": 37.133
+  },
+  {
+   "text": "Sixteen-year-old Homan Walsh hiked to the windy Canadian rim with a homemade kite named The Union.",
+   "s": 37.915,
+   "e": 43.313
+  },
+  {
+   "text": "On his first try,",
+   "s": 43.551,
+   "e": 44.078
+  },
+  {
+   "text": "the freezing night wind dropped his line onto jagged river ice,",
+   "s": 44.858,
+   "e": 49.653
+  },
+  {
+   "text": "snapping it clean in two.",
+   "s": 49.882,
+   "e": 51.415
+  },
+  {
+   "text": "But how could a thin cotton string hold up an iron bridge?",
+   "s": 52.194,
+   "e": 55.678
+  },
+  {
+   "text": "You see,",
+   "s": 56.32,
+   "e": 56.824
+  },
+  {
+   "text": "you never haul the heavy stuff first.",
+   "s": 57.218,
+   "e": 59.306
+  },
+  {
+   "text": "When Homan repaired his kite and landed it across the chasm,",
+   "s": 60.063,
+   "e": 63.159
+  },
+  {
+   "text": "workers tied a strong cord to his twine.",
+   "s": 63.621,
+   "e": 66.018
+  },
+  {
+   "text": "That cord pulled a thick rope,",
+   "s": 66.725,
+   "e": 68.451
+  },
+  {
+   "text": "the rope hauled an iron cable,",
+   "s": 68.921,
+   "e": 70.655
+  },
+  {
+   "text": "and soon carriages were rolling across the sky\u2014all started by a five-dollar kite.",
+   "s": 71.062,
+   "e": 76.603
+  }
+ ]
+}

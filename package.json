@@ -1,0 +1,15 @@
+{
+  "name": "niagara-short",
+  "version": "1.0.0",
+  "description": "The Boy Who Built Niagara's First Bridge - vertical cartoon audio short",
+  "type": "module",
+  "scripts": {
+    "stills": "node render.mjs stills/a 5,110,280,504,615,726,850,1040,1220,1498,1730,2075,2180,2275",
+    "render": "node render.mjs frames 0-2301",
+    "finish": "bash finish.sh \"The Boy Who Built Niagaras First Bridge\""
+  },
+  "dependencies": {
+    "playwright": "^1.65.1",
+    "three": "0.160.0"
+  }
+}

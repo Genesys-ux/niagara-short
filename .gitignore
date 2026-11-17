@@ -1,0 +1,7 @@
+node_modules/
+frames/
+out/
+work/_voice_mix.wav
+__pycache__/
+*.pyc
+mix.wav

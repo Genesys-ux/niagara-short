@@ -1,0 +1,71 @@
+name: Render Niagara Cartoon Short
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: 'Output video title'
+        required: false
+        default: 'The Boy Who Built Niagaras First Bridge'
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  render-mp4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install system ffmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install Python dependencies
+        run: pip install numpy pillow imageio-ffmpeg
+
+      - name: Install Node dependencies & Playwright Chromium
+        run: |
+          npm install
+          npx playwright install chromium --with-deps
+
+      - name: Ensure audio stems and mix_raw.wav
+        run: |
+          if [ ! -f mix_raw.wav ]; then
+            python3 audio.py
+            python3 mix.py voice.mp3 music.wav sfx.wav
+          fi
+
+      - name: Render all 2302 frames (0-2301)
+        run: |
+          mkdir -p frames out
+          node render.mjs frames "0-2301"
+
+      - name: Master audio, encode MP4, and run QA (finish.sh)
+        run: |
+          sed -i 's/\r$//' finish.sh
+          chmod +x finish.sh
+          bash finish.sh "${{ github.event.inputs.title || 'The Boy Who Built Niagaras First Bridge' }}"
+
+      - name: Upload rendered MP4 and QA sheet
+        uses: actions/upload-artifact@v4
+        with:
+          name: niagara-cartoon-short
+          path: |
+            out/*.mp4
+            out/qa_sheet.jpg
+          retention-days: 30
