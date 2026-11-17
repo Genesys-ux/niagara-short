@@ -13,9 +13,13 @@ on:
       - master
 
 jobs:
-  render-mp4:
+  render-shards:
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    strategy:
+      fail-fast: true
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,23 +29,67 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Install Node dependencies & Playwright Chromium
+        run: |
+          npm install
+          npx playwright install chromium --with-deps
+
+      - name: Render shard ${{ matrix.shard }} (2 parallel processes)
+        run: |
+          mkdir -p frames
+          SHARD=${{ matrix.shard }}
+          TOTAL=2302
+          CHUNK=288
+          START=$((SHARD * CHUNK))
+          END=$(((SHARD + 1) * CHUNK - 1))
+          if [ $END -ge $TOTAL ]; then END=$((TOTAL - 1)); fi
+          MID=$(((START + END) / 2))
+          echo "Shard $SHARD rendering $START-$MID and $((MID + 1))-$END"
+          node render.mjs frames "${START}-${MID}" &
+          P1=$!
+          node render.mjs frames "$((MID + 1))-${END}" &
+          P2=$!
+          wait $P1
+          wait $P2
+
+      - name: Upload shard frames
+        uses: actions/upload-artifact@v4
+        with:
+          name: frames-shard-${{ matrix.shard }}
+          path: frames/f*.jpg
+          retention-days: 1
+
+  encode-mp4:
+    needs: render-shards
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Setup Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Install system ffmpeg
+      - name: Install system ffmpeg & Python deps
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
+          pip install numpy
 
-      - name: Install Python dependencies
-        run: pip install numpy pillow imageio-ffmpeg
+      - name: Download all frame shards
+        uses: actions/download-artifact@v4
+        with:
+          pattern: frames-shard-*
+          path: frames
+          merge-multiple: true
 
-      - name: Install Node dependencies & Playwright Chromium
+      - name: Verify all 2302 frames are present
         run: |
-          npm install
-          npx playwright install chromium --with-deps
+          COUNT=$(ls -1 frames/f*.jpg | wc -l)
+          echo "Downloaded frames: $COUNT"
+          test "$COUNT" -eq 2302
 
       - name: Ensure audio stems and mix_raw.wav
         run: |
@@ -50,13 +98,9 @@ jobs:
             python3 mix.py voice.mp3 music.wav sfx.wav
           fi
 
-      - name: Render all 2302 frames (0-2301)
-        run: |
-          mkdir -p frames out
-          node render.mjs frames "0-2301"
-
       - name: Master audio, encode MP4, and run QA (finish.sh)
         run: |
+          mkdir -p out
           sed -i 's/\r$//' finish.sh
           chmod +x finish.sh
           bash finish.sh "${{ github.event.inputs.title || 'The Boy Who Built Niagaras First Bridge' }}"
